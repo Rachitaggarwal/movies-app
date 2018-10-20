@@ -1,0 +1,48 @@
+
+<div class="container">
+	<div class="row search-box-placement">
+		<div class="col-sm-4 ">
+			<form class="form-inline" autocomplete="off">
+		      <input class="form-control" type="search" [(ngModel)]="searchText" name="searchText" placeholder="Search..." aria-label="Search">
+		    </form>
+		</div>
+
+		<div class="col-sm-4">
+			
+			<div class="form-group">
+				<form class="form-inline">
+					<select class="form-control" id="sel1" (ngModelChange)='filterByGenres($event)' [(ngModel)]="filterGenres" name="filterGenres">
+						<option value=""> All Genres </option>
+						<option value="action"> Action </option>
+						<option value="adventure"> Adventure </option>
+						<option value="biography">  Biography </option>
+						<option value="comedy"> Comedy  </option>
+						<option value="crime"> Crime </option>
+						<option value="drama"> Drama </option>
+						<option value="history"> History </option>
+						<option value="mystery"> Mystery </option>
+						<option value="scifi"> Scifi </option>
+						<option value="sport"> Sport </option>
+						<option value="thriller"> Thriller </option>
+					</select>
+				</form>
+			</div> 
+		</div>
+	</div>
+	<div class="row" *ngIf="filteredMovies.length>0">
+		<div class="col-md-6 col-lg-3 tile-spacing" *ngFor="let movie of filteredMovies | search : searchText">
+			<div class="tile card"> 
+				<a [routerLink]="movie.id"> 
+					<img [src]="movie.img">
+					<div>
+						<strong>{{movie.name}} </strong>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="row" *ngIf="filteredMovies.length===0">
+		No results Found!! Try broadening your filter criteria
+	</div>
+</div>
+
